@@ -1,0 +1,22 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^0.2.4",
+    "astro": "^1.0.0-beta.73"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^0.2.4",
+    "@tailwindcss/forms": "^0.5.2",
+    "@types/jquery": "^3.5.14",
+    "nanostores": "^0.5.12",
+    "tailwindcss": "^3.1.6"
+  }
+}
