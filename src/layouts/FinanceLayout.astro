@@ -1,0 +1,90 @@
+---
+export interface Props {
+   title: string;
+	leftContainerHeader: string;
+}
+
+const { title, leftContainerHeader } = Astro.props as Props;
+---
+<!DOCTYPE html>
+<html class="bg-slate-50">
+  <head>
+    <base target="_top">
+    <title>{title}</title>
+  </head>
+  <body style="font-family: Arial,sans-serif; color: #151515;">
+    <header class="pageHeader" id="pageHeader"> <!-- Done -->
+      <img id="logo"/>
+    </header>
+
+    <div class="gridContainer"> <!-- Done -->
+      <div class="leftContainer"> <!-- Done -->
+        <h1>{leftContainerHeader}</h1>
+        <p class="note">Note: These are year end values for each year listed</p> <!-- Done -->
+        <div id="yearlyValuesList" class="yearlyValuesListNEW loading"> <!-- Done -->
+          
+          <slot name="yearlyValues" />
+          
+        </div>
+      </div>
+      <div class="rightContainer"> <!-- Done -->
+        <div id="chartsContainer" class="charts">
+          <div id="drawingChartsContainer">
+            <h4>Loading...</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+   .pageHeader {
+      text-align: center;
+      margin-bottom: 3em;
+   }
+
+   .gridContainer {
+      display: grid;
+      grid-template-columns: 33% 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 3em;
+   }
+
+   .leftContainer {
+      text-align: center;
+   }
+
+   .rightContainer {
+      text-align: center;
+   }
+
+   .yearlyValuesListNEW {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: no wrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+   }
+
+   .yearlyValuesListNEW::-webkit-scrollbar {
+      height: 0;
+      width: 0;
+   }
+
+   .loading {
+      justify-content: center;
+      align-items: center;
+   }
+
+   .charts {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+   }
+
+   .note {
+      font-size: 10px;
+   }
+</style>

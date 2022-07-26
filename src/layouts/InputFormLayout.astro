@@ -1,0 +1,95 @@
+---
+export interface Props {
+   title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html class="bg-slate-50">
+  <head>
+    <base target="_top">
+    <title>{title}</title>
+  </head>
+  <body style="font-family: Arial,sans-serif; color: #151515;" class="py-2">
+    <div class="grid grid-cols-2 grid-rows-1"> <!-- Done -->
+      <div class="flex items-center justify-center"> <!-- Done -->
+         <div class="flex">
+            <img src="../../crispyFinancialGroupLogo.png" class="rounded-lg shadow-lg h-72 w-72"/>
+         </div>
+      </div>
+      <div class="rightContainer justify-self-start"> <!-- Done -->
+         <div>
+            <h2 class="text-2xl font-bold">Financial Model Input</h2>
+            <div class="mt-8 max-w-lg">
+               <form action="/financialModel" method="GET">
+                  <div class="grid gap-6 grid-cols-1 xl:grid-cols-2 xl:grid-rows-5">
+                     <label class="block">
+                        <span class="text-gray-700">Starting Amount</span>
+                        <input type="number" id="startingAmount" name="startingAmount" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="100000">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">Number of Years</span>
+                        <input type="number" id="numberOfYears" name="numberOfYears" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="30">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">Annual Growth Rate Percentage</span>
+                        <input type="number" id="annualGrowthRatePercentage" name="annualGrowthRatePercentage" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="7">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">Years until withdrawal</span>
+                        <input type="number" id="yearsUntilWithdrawl" name="yearsUntilWithdrawl" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="10">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">% balance for annual withdrawal</span>
+                        <input type="number" id="percentBalanceAnnualWithdrawal" name="percentBalanceAnnualWithdrawal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="5">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">Number years to market crash 1</span>
+                        <input type="number" id="yearsToMarketCrash1" name="yearsToMarketCrash1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="3">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">% first market crash</span>
+                        <input type="number" id="percentFirstMarketCrash" name="percentFirstMarketCrash" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="20">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">Number years to market crash 2</span>
+                        <input type="number" id="yearsToMarketCrash2" name="yearsToMarketCrash2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="12">
+                     </label>
+                     <label class="block">
+                        <span class="text-gray-700">% second market crash</span>
+                        <input type="number" id="percentSecondMarketCrash" name="percentSecondMarketCrash" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="25">
+                     </label>
+                     <input type="submit" value="Submit">
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+
+   .gridContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 3em;
+      justify-items: center;
+      align-items: center;
+   }
+
+   .leftContainer {
+      display: flex;
+      flex: 1 1 auto;
+   }
+
+   .leftFlex {
+      display: flex;
+      flex: 1 1 auto;
+   }
+
+</style>

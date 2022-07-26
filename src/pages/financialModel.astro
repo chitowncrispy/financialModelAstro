@@ -1,0 +1,115 @@
+---
+import FinanceLayout from "../layouts/FinanceLayout.astro";
+import { isCartOpen, customSetCartOpen } from '../pages/placeholder.js';
+   
+const requestURL = Astro.request.url;
+const queryParamString = requestURL.substring(requestURL.indexOf('?') + 1);
+const queryParams = queryParamString.split('&');
+console.log(queryParamString);
+console.log(queryParams);
+
+const queryParamsMap = new Map<string, string>();
+
+queryParams.forEach((queryParam) => {
+   const keyValue = queryParam.split("=");
+   queryParamsMap.set(keyValue[0], keyValue[1]);
+})
+
+console.log(queryParamsMap);
+
+const startingAmount = queryParamsMap.get("startingAmount");
+const numberOfYears = queryParamsMap.get("numberOfYears");
+const annualGrowthRateStockMarketAccount = queryParamsMap.get("annualGrowthRatePercentage");
+const annualGrowthRateSafeMoneyOption = queryParamsMap.get("annualGrowthRatePercentage");
+const yearsUntilAnnualWithdrawals = queryParamsMap.get("yearsUntilWithdrawl");
+const percentageDrawdownInWithdrawalYear = queryParamsMap.get("percentBalanceAnnualWithdrawal");
+const marketCrash1Year = queryParamsMap.get("yearsToMarketCrash1");
+const percentageDrawdownMarketCrash1 = queryParamsMap.get("percentFirstMarketCrash");
+const marketCrash2Year = queryParamsMap.get("yearsToMarketCrash2");
+const percentageDrawdownMarketCrash2 = queryParamsMap.get("percentSecondMarketCrash");
+
+console.log(startingAmount);
+console.log(numberOfYears);
+console.log(annualGrowthRateStockMarketAccount);
+console.log(annualGrowthRateSafeMoneyOption);
+console.log(yearsUntilAnnualWithdrawals);
+console.log(percentageDrawdownInWithdrawalYear);
+console.log(marketCrash1Year);
+console.log(percentageDrawdownMarketCrash1);
+console.log(marketCrash2Year);
+console.log(percentageDrawdownMarketCrash2);
+
+function calculateYearlyValuesStockMarketAccount(startingAmount, numberOfYears, annualGrowthRateStockMarketAccount, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, percentageDrawdownMarketCrash1, marketCrash2Year, percentageDrawdownMarketCrash2) {
+  const initialInvestment = startingAmount;
+  let yearlyValues = [];
+
+  for (let i = 0; i <= numberOfYears; i++) {
+    if (i == 0) {
+      yearlyValues.push({ 'year': i, 'value': initialInvestment, 'percentChange': 0 });
+      // saveToSessionStorage('yearlyValuesStockMarketAccount', i, initialInvestment, 0);
+    } else {
+      let calculatedGrowthRate = annualGrowthRateStockMarketAccount;
+      if (i == marketCrash1Year) {
+        calculatedGrowthRate = -percentageDrawdownMarketCrash1;
+      }
+      if (i == marketCrash2Year) {
+        calculatedGrowthRate = -percentageDrawdownMarketCrash2
+      }
+      if (i >= yearsUntilAnnualWithdrawals) {
+        calculatedGrowthRate -= percentageDrawdownInWithdrawalYear;
+      }
+
+      let previousYearlyTotal = yearlyValues[i - 1].value;
+      const currentYearTotal = Math.round(previousYearlyTotal += previousYearlyTotal * calculatedGrowthRate);
+      yearlyValues.push({ 'year': i, 'value': currentYearTotal, 'percentChange': calculatedGrowthRate });
+    }
+  }
+
+  return yearlyValues;
+}
+
+function calculateYearlyValuesSafeMoneyOption(startingAmount, numberOfYears, annualGrowthRate, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, marketCrash2Year) {
+  const initialInvestment = startingAmount;
+  let yearlyValues = [];
+
+  for (let i = 0; i <= numberOfYears; i++) {
+    if (i == 0) {
+      yearlyValues.push({ 'year': i, 'value': initialInvestment, 'percentChange': 0 });
+    } else {
+      let calculatedGrowthRate = annualGrowthRate;
+      if (i == marketCrash1Year || i == marketCrash2Year) {
+        calculatedGrowthRate = 0;
+      }
+      if (i >= yearsUntilAnnualWithdrawals) {
+        calculatedGrowthRate -= percentageDrawdownInWithdrawalYear;
+      }
+
+      let previousYearlyTotal = yearlyValues[i - 1].value;
+      const currentYearTotal = Math.round(previousYearlyTotal += previousYearlyTotal * calculatedGrowthRate);
+      yearlyValues.push({ 'year': i, 'value': currentYearTotal, 'percentChange': calculatedGrowthRate });
+    }
+  }
+
+  return yearlyValues;
+}
+
+const yearlyValuesStockMarketAccount = calculateYearlyValuesStockMarketAccount(startingAmount, numberOfYears, annualGrowthRateStockMarketAccount, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, percentageDrawdownMarketCrash1, marketCrash2Year, percentageDrawdownMarketCrash2);
+const yearlyValuesSafeMoneyOption = calculateYearlyValuesSafeMoneyOption(startingAmount, numberOfYears, annualGrowthRateSafeMoneyOption, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, marketCrash2Year);
+---
+
+<FinanceLayout title="Crispy Financial Group" leftContainerHeader="Yearly Values">
+   <div  slot="yearlyValues">
+      <p>{yearlyValuesStockMarketAccount}</p>
+   </div>
+</FinanceLayout>
+
+<style>
+   .hiddenElements {
+      display: none;
+   }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" is:inline></script>
+<script type="module">
+   
+</script>
