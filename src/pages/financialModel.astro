@@ -92,8 +92,31 @@ function calculateYearlyValuesSafeMoneyOption(startingAmount: number, numberOfYe
   return yearlyValues;
 }
 
+function determineYearString(i: Number, year: Number) {
+  let yearString = "";
+  if (i==0) {
+    yearString = "Starting"
+  } else {
+    yearString = year.toString();
+  }
+  return yearString;
+}
+
+function createYearlyValuesRowData(yearlyValuesStockMarketAccount, yearlyValuesSafeMoneyOption): string[][] {
+  let rowData = [['Year', 'Stock Market Account', 'Stock Market Percentage', 'Safe Money Option', 'Safe Money Percentage']];
+
+  for (let i=0; i<yearlyValuesStockMarketAccount.length; i++) {
+    let yearString = determineYearString(i, yearlyValuesStockMarketAccount[i].year);
+    rowData.push([yearString, yearlyValuesStockMarketAccount[i].value, yearlyValuesStockMarketAccount[i].percentChange, yearlyValuesSafeMoneyOption[i].value, yearlyValuesSafeMoneyOption[i].percentChange]);
+  }
+
+  return rowData;
+}
+
 const yearlyValuesStockMarketAccount = calculateYearlyValuesStockMarketAccount(startingAmount, numberOfYears, annualGrowthRateStockMarketAccount, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, percentageDrawdownMarketCrash1, marketCrash2Year, percentageDrawdownMarketCrash2);
 const yearlyValuesSafeMoneyOption = calculateYearlyValuesSafeMoneyOption(startingAmount, numberOfYears, annualGrowthRateSafeMoneyOption, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, marketCrash2Year);
+
+const rowData = createYearlyValuesRowData(yearlyValuesStockMarketAccount, yearlyValuesSafeMoneyOption);
 ---
 
 <FinanceLayout title="Crispy Financial Group" leftContainerHeader="Yearly Values">
