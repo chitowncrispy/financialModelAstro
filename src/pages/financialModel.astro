@@ -1,6 +1,5 @@
 ---
 import FinanceLayout from "../layouts/FinanceLayout.astro";
-import { isCartOpen, customSetCartOpen } from '../pages/placeholder.js';
    
 const requestURL = Astro.request.url;
 const queryParamString = requestURL.substring(requestURL.indexOf('?') + 1);
@@ -108,5 +107,3 @@ const yearlyValuesSafeMoneyOption = calculateYearlyValuesSafeMoneyOption(startin
       display: none;
    }
 </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" is:inline></script>
