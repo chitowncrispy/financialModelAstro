@@ -1,4 +1,6 @@
 ---
+import logo from '../images/crispyFinancialGroupLogo.png';
+
 export interface Props {
    title: string;
 	leftContainerHeader: string;
@@ -14,7 +16,7 @@ const { title, leftContainerHeader } = Astro.props as Props;
   </head>
   <body style="font-family: Arial,sans-serif; color: #151515;">
     <header class="pageHeader" id="pageHeader"> <!-- Done -->
-      <img id="logo"/>
+      <img src={logo} alt="Crispy Financial Group Logo" id="logo"/>
     </header>
 
     <div class="gridContainer"> <!-- Done -->
@@ -40,8 +42,9 @@ const { title, leftContainerHeader } = Astro.props as Props;
 
 <style>
    .pageHeader {
-      text-align: center;
-      margin-bottom: 3em;
+      display: flex;
+      justify-content: center;
+      margin: 1em 0 2em;
    }
 
    .gridContainer {
