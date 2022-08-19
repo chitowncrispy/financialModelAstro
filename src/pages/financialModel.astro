@@ -16,16 +16,16 @@ queryParams.forEach((queryParam) => {
 
 console.log(queryParamsMap);
 
-const startingAmount = queryParamsMap.get("startingAmount");
-const numberOfYears = queryParamsMap.get("numberOfYears");
-const annualGrowthRateStockMarketAccount = queryParamsMap.get("annualGrowthRatePercentage");
-const annualGrowthRateSafeMoneyOption = queryParamsMap.get("annualGrowthRatePercentage");
-const yearsUntilAnnualWithdrawals = queryParamsMap.get("yearsUntilWithdrawl");
-const percentageDrawdownInWithdrawalYear = queryParamsMap.get("percentBalanceAnnualWithdrawal");
-const marketCrash1Year = queryParamsMap.get("yearsToMarketCrash1");
-const percentageDrawdownMarketCrash1 = queryParamsMap.get("percentFirstMarketCrash");
-const marketCrash2Year = queryParamsMap.get("yearsToMarketCrash2");
-const percentageDrawdownMarketCrash2 = queryParamsMap.get("percentSecondMarketCrash");
+const startingAmount = Number(queryParamsMap.get("startingAmount"));
+const numberOfYears = Number(queryParamsMap.get("numberOfYears"));
+const annualGrowthRateStockMarketAccount = Number(queryParamsMap.get("annualGrowthRatePercentage"));
+const annualGrowthRateSafeMoneyOption = Number(queryParamsMap.get("annualGrowthRatePercentage"));
+const yearsUntilAnnualWithdrawals = Number(queryParamsMap.get("yearsUntilWithdrawl"));
+const percentageDrawdownInWithdrawalYear = Number(queryParamsMap.get("percentBalanceAnnualWithdrawal"));
+const marketCrash1Year = Number(queryParamsMap.get("yearsToMarketCrash1"));
+const percentageDrawdownMarketCrash1 = Number(queryParamsMap.get("percentFirstMarketCrash"));
+const marketCrash2Year = Number(queryParamsMap.get("yearsToMarketCrash2"));
+const percentageDrawdownMarketCrash2 = Number(queryParamsMap.get("percentSecondMarketCrash"));
 
 console.log(startingAmount);
 console.log(numberOfYears);
@@ -38,7 +38,7 @@ console.log(percentageDrawdownMarketCrash1);
 console.log(marketCrash2Year);
 console.log(percentageDrawdownMarketCrash2);
 
-function calculateYearlyValuesStockMarketAccount(startingAmount, numberOfYears, annualGrowthRateStockMarketAccount, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, percentageDrawdownMarketCrash1, marketCrash2Year, percentageDrawdownMarketCrash2) {
+function calculateYearlyValuesStockMarketAccount(startingAmount: number, numberOfYears: number, annualGrowthRateStockMarketAccount: number, yearsUntilAnnualWithdrawals: number, percentageDrawdownInWithdrawalYear: number, marketCrash1Year: number, percentageDrawdownMarketCrash1: number, marketCrash2Year: number, percentageDrawdownMarketCrash2: number) {
   const initialInvestment = startingAmount;
   let yearlyValues = [];
 
@@ -67,7 +67,7 @@ function calculateYearlyValuesStockMarketAccount(startingAmount, numberOfYears, 
   return yearlyValues;
 }
 
-function calculateYearlyValuesSafeMoneyOption(startingAmount, numberOfYears, annualGrowthRate, yearsUntilAnnualWithdrawals, percentageDrawdownInWithdrawalYear, marketCrash1Year, marketCrash2Year) {
+function calculateYearlyValuesSafeMoneyOption(startingAmount: number, numberOfYears: number, annualGrowthRate: number, yearsUntilAnnualWithdrawals: number, percentageDrawdownInWithdrawalYear: number, marketCrash1Year: number, marketCrash2Year: number) {
   const initialInvestment = startingAmount;
   let yearlyValues = [];
 
